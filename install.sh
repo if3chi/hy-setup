@@ -30,6 +30,7 @@ PACMAN_PACKAGES=(
     noto-fonts-emoji
     noto-fonts-cjk
     noto-fonts-extra
+    xdg-desktop-portal
     xdg-desktop-portal-hyprland
     libnotify
     qt5-wayland
@@ -51,6 +52,8 @@ PACMAN_PACKAGES=(
     jq
     neovim
     btop
+    bluez 
+    bluez-utils
     blueman
     grim
     slurp
@@ -63,8 +66,19 @@ PACMAN_PACKAGES=(
     rofi-wayland
     polkit-gnome
     zsh
+    zsh-completions
+    cargo
     fzf
-    pavucontrol
+    wf-recorder 
+    swappy
+    pipewire 
+    pipewire-audio 
+    pipewire-pulse 
+    wireplumber 
+    pavucontrol 
+    alsa-utils
+    brightnessctl 
+    acpi 
     papirus-icon-theme
     breeze
     flatpak
@@ -169,8 +183,11 @@ if [ -d "confs" ]; then
   cp /usr/share/oh-my-posh/themes/*.json ~/.config/ohmyposh/
 fi
 
-# Enabling sddm
+# Enabling services
 sudo systemctl enable sddm.service
+sudo systemctl enable --now bluetooth.service
+sudo systemctl enable --now NetworkManager.service
+sudo systemctl enable --now power-profiles-daemon.service
 
 # Create a drop-in override for systemd sleep settings
 echo "Creating sleep.conf.d override for suspend-then-hibernate..."
@@ -183,4 +200,6 @@ SuspendState=mem
 HibernateMode=platform shutdown
 EOF
 
-echo "Done, run chsh -s /bin/zsh to change shell"
+echo "✅ Installation complete!"
+echo "💡 Don't forget to set zsh as your default shell:"
+echo "    chsh -s /bin/zsh"
