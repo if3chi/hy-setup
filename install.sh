@@ -23,6 +23,7 @@ PACMAN_PACKAGES=(
     xdg-user-dirs
     hyprland
     hyprpaper
+    hypridle
     hyprlock
     hyprpicker
     hyprutils
@@ -52,7 +53,7 @@ PACMAN_PACKAGES=(
     jq
     neovim
     btop
-    bluez 
+    bluez
     bluez-utils
     blueman
     grim
@@ -69,22 +70,21 @@ PACMAN_PACKAGES=(
     zsh-completions
     cargo
     fzf
-    wf-recorder 
+    wf-recorder
     swappy
-    pipewire 
-    pipewire-audio 
-    pipewire-pulse 
-    wireplumber 
-    pavucontrol 
+    pipewire
+    pipewire-audio
+    pipewire-pulse
+    wireplumber
+    pavucontrol
     alsa-utils
-    brightnessctl 
-    acpi 
+    brightnessctl
+    acpi
     papirus-icon-theme
     breeze
     flatpak
     swaync
     gvfs
-    wlogout
     power-profiles-daemon
     seatd
     libinput
@@ -114,6 +114,7 @@ AUR_PACKAGES=(
     hyprshade
     zen-browser-bin
     oh-my-posh-bin
+    wlogout
 )
 
 # Install official packages
@@ -186,7 +187,6 @@ fi
 # Enabling services
 sudo systemctl enable sddm.service
 sudo systemctl enable --now bluetooth.service
-sudo systemctl enable --now NetworkManager.service
 sudo systemctl enable --now power-profiles-daemon.service
 
 # Create a drop-in override for systemd sleep settings

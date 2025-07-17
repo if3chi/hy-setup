@@ -1,0 +1,7 @@
+font-family = "JetBrainsMono Nerd Font"
+font-size = 13
+cursor-style = underline
+background-opacity = 0.8
+#background-blur = 50
+gtk-titlebar = false
+shell-integration-features = no-cursor

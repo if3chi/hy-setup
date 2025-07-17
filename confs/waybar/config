@@ -7,7 +7,10 @@
   "modules-left": [
     "clock",
     "custom/sep",
-    "tray"
+    "battery",
+    "custom/sep",
+    "network"
+    // "tray"
   ],
   "modules-center": [
     "hyprland/workspaces"
@@ -18,14 +21,33 @@
     "temperature",
     "custom/sep",
     "pulseaudio",
+    "pulseaudio#microphone",
+    // "backlight",
     "custom/powermenu"
   ],
   "custom/sep": {
-    //    "format": "──"
-    "format": ""
+       "format": "──"
+    // "format": ""
+  },
+  "battery": {
+    "states": {
+      "warning": 30,
+      "critical": 15
+    },
+    "rotate": 90,
+    "format": "<span size='10000' foreground='#a6e3a1'>{icon} </span> {capacity}%",
+    "format-warning": "<span size='10000' foreground='#B1E3AD'>{icon} </span> {capacity}%",
+    "format-critical": "<span size='10000' foreground='#E38C8F'>{icon} </span> {capacity}%",
+    "format-charging": "<span size='10000' foreground='#B1E3AD'> </span>{capacity}%",
+    "format-plugged": "<span size='10000' foreground='#B1E3AD'> </span>{capacity}%",
+    "format-alt": "<span size='10000' foreground='#B1E3AD'>{icon} </span> {time}",
+    "format-full": "<span size='10000' foreground='#B1E3AD'> </span>{capacity}%",
+    "format-icons": ["", "", "", "", ""],
+        // "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
+    "tooltip-format": "{time}"
   },
   "custom/powermenu": {
-    "on-click": "~/.config/wofi/scripts/wofipowermenu.py",
+    "on-click": "~/.config/wlogout/script/logout.sh",
     "format": "",
     "tooltip": false
   },
@@ -51,11 +73,11 @@
   },
   "clock": {
     "tooltip": true,
-    "format": "{:%H\n%M}",
-    "tooltip-format": "{:%Y-%m-%d}",
+    "format": "{:%H\n%M\n%d}",
+    "tooltip-format":  "<big>{:%A, %d}</big>\n<tt><small>{calendar}</small></tt>"
   },
   "tray": {
-    "icon-size": 18,
+    "icon-size": 12,
     "show-passive-items": "true"
   },
   "temperature": {
@@ -70,24 +92,59 @@
     ]
   },
   "pulseaudio": {
-    "rotate": 90,
-    "format": "{icon} {volume}%",
-    "format-bluetooth": "{icon} {volume}%",
-    "format-muted": "MUTE ",
-    "format-icons": {
-      "headphones": "",
-      "handsfree": "",
-      "headset": "",
-      "phone": "",
-      "portable": "",
-      "car": "",
-      "default": [
-        "",
-        ""
-      ]
+        "rotate": 90,
+        "format": " {icon}   {volume}%",
+        "format-muted": "",
+        "format-bluetooth": "{icon}   {volume}%",
+        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+        "on-click-right": "pavucontrol",
+        "on-scroll-up": "wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+",
+        "on-scroll-down": "wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%-",
+        "scroll-step": 5,
+        "format-icons": {
+            "headphone": "",
+            "handsfree": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "tooltip": true,
+        "tooltip-format": "{icon}   at {volume}%"
     },
-    "scroll-step": 3,
-    "on-click": "pavucontrol",
-    "on-click-right": "pactl set-source-mute @DEFAULT_SOURCE@ toggle"
+    "pulseaudio#microphone": {
+        "rotate": 90,
+        "format": "{format_source}",
+        "format-source": "",
+        "format-source-muted": "",
+        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
+        "on-scroll-up": "wpctl set-volume -l 1 @DEFAULT_AUDIO_SOURCE@ 5%+",
+        "on-scroll-down": "wpctl set-volume -l 1 @DEFAULT_AUDIO_SOURCE@ 5%-",
+        "scroll-step": 5,
+        "tooltip": true,
+        "tooltip-format": " at {volume}%"
+    },
+    "backlight": {
+        "device": "intel_backlight",
+        "format": "{icon}",
+        "format-alt-click": "click-right",
+        "format-alt": "{icon} {percent}%",
+        "format-icons": ["󰃞", "󰃟", "󰃠"],
+        "on-scroll-up": "incbrightness",
+        "on-scroll-down": "decbrightness"
+    },
+  "network": {
+    "rotate": 90,
+    "format": "{ifname}",
+    "format-wifi": "<span size='10000' foreground='#f5e0dc'>  </span>{essid}",
+    "format-ethernet": " ",
+    "format-disconnected": " ", //An empty format will hide the module.
+    "on-click": "nm-applet",
+    "tooltip-format": " {ifname} via {gwaddr}",
+    "tooltip-format-wifi": "   {essid} ({signalStrength}%)",
+    "tooltip-format-ethernet": "  {ifname} {ipaddr}/{cidr}",
+    "tooltip-format-disconnected": "Disconnected",
+    "max-length": 50
   }
 }
