@@ -202,6 +202,12 @@ SuspendState=mem
 HibernateMode=platform shutdown
 EOF
 
+# Disable aggressive power saving
+echo "Disable power saving"
+sudo tee /etc/modprobe.d/iwlwifi.conf > /dev/null <<EOF
+options iwlwifi power_save=0
+EOF
+
 echo "✅ Installation complete!"
 echo "💡 Don't forget to set zsh as your default shell:"
 echo "    chsh -s /bin/zsh"
