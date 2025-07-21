@@ -1,222 +1,222 @@
 {
-	"layer": "top",
-	"position": "left",
-	"width": 28,
-	"margin": "2 0 2 2",
-	"spacing": 2,
-	"modules-left": [
-		"clock",
-		"custom/sep",
-		"group/bat",
-		"custom/sep",
-		"network"
-	],
-	"modules-center": [
-		"custom/updates",
-		"tray",
-		"custom/sep",
-		"hyprland/workspaces"
-	],
-	"modules-right": [
-		"custom/bluetooth_devices",
-		"custom/sep",
-		"temperature",
-		"custom/sep",
-		"pulseaudio",
-		"pulseaudio#microphone",
-		"custom/powermenu"
-	],
-	"custom/sep": {
-		"format": "──",
-		"format-v2": ""
-	},
-	"custom/updates": {
-		"rotate": 90,
-		"format": "  {}",
-		"interval": 1800,
-		"escape": true,
-		"return-type": "json",
-		"exec": "$HOME/.config/waybar/scripts/update-sys.sh",
-		"exec-if": "[[ $(checkupdates-with-aur | wc -l) != 0 ]]",
-		"on-click": "foot --title 'update-sys' sh -c 'yay -Syu; echo Done - Press enter to exit; read'; pkill -SIGRTMIN+8 waybar",
-		"signal": 8,
-		"hide-empty-text": true
-	},
-	"battery": {
-		"states": {
-			"warning": 30,
-			"critical": 15
-		},
-		"rotate": 90,
-		"format": "<span size='10000' foreground='#a6e3a1'>{icon} </span> {capacity}%",
-		"format-warning": "<span size='10000' foreground='#B1E3AD'>{icon} </span> {capacity}%",
-		"format-critical": "<span size='10000' foreground='#E38C8F'>{icon} </span> {capacity}%",
-		"format-charging": "<span size='10000' foreground='#B1E3AD'> </span>{capacity}%",
-		"format-plugged": "<span size='10000' foreground='#B1E3AD'>  </span>{capacity}%",
-		"format-alt": "<span size='10000' foreground='#B1E3AD'>{icon} </span> {time}",
-		"format-full": "<span size='10000' foreground='#B1E3AD'> </span>{capacity}%",
-		"format-icons": [
-			"",
-			"",
-			"",
-			"",
-			""
-		],
-		"tooltip-format": "{time}"
-	},
-	"custom/powermenu": {
-		"on-click": "~/.config/wlogout/script/logout.sh",
-		"format": "",
-		"tooltip": false
-	},
-	"custom/bluetooth_devices": {
-		"exec": "$HOME/.config/waybar/scripts/bluetooth_devices.sh",
-		"return-type": "json",
-		"format": "{}",
-		"justify": "center",
-		"rotate": 90,
-		"interval": 5,
-		"on-click": "blueman-manager"
-	},
-	"hyprland/workspaces": {
-		"format": "{icon}",
-		"on-click": "activate",
-		"on-scroll-up": "hyprctl dispatch workspace e-1",
-		"on-scroll-down": "hyprctl dispatch workspace e+1",
-		"format-icons": {
-			"active": "",
-			"urgent": "",
-			"default": ""
-		}
-	},
-	"clock": {
-		"tooltip": true,
-		"format": "{:%H\n%M\n%d}",
-		"tooltip-format": "<big>{:%A, %d}</big>\n<tt><small>{calendar}</small></tt>"
-	},
-	"tray": {
-		"icon-size": 21,
-		"spacing": 10,
-		"show-passive-items": "true"
-	},
-	"temperature": {
-		"rotate": 90,
-		"hwmon-path": "/sys/class/hwmon/hwmon3/temp1_input",
-		"critical-threshold": 80,
-		"format": "{icon} {temperatureC}°C",
-		"format-icons": [
-			"",
-			"",
-			""
-		]
-	},
-	"pulseaudio": {
-		"rotate": 90,
-		"format": " {icon}   {volume}%",
-		"format-muted": "  ",
-		"format-bluetooth": "{icon}   {volume}%",
-		"on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
-		"on-click-right": "pavucontrol",
-		"on-scroll-up": "wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+",
-		"on-scroll-down": "wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%-",
-		"scroll-step": 5,
-		"format-icons": {
-			"headphone": "",
-			"handsfree": "",
-			"headset": "",
-			"phone": "",
-			"portable": "",
-			"car": "",
-			"default": [
-				"",
-				"",
-				""
-			]
-		},
-		"tooltip": true,
-		"tooltip-format": "{icon}   at {volume}%"
-	},
-	"pulseaudio#microphone": {
-		"rotate": 90,
-		"format": "{format_source}",
-		"format-source": "",
-		"format-source-muted": " ",
-		"on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
-		"on-scroll-up": "wpctl set-volume -l 1 @DEFAULT_AUDIO_SOURCE@ 5%+",
-		"on-scroll-down": "wpctl set-volume -l 1 @DEFAULT_AUDIO_SOURCE@ 5%-",
-		"scroll-step": 5,
-		"tooltip": true,
-		"tooltip-format": " at {volume}%"
-	},
-	"backlight": {
-		"device": "intel_backlight",
-		"format": "{icon}",
-		"format-alt-click": "click-right",
-		"format-alt": "{icon} {percent}%",
-		"format-icons": [
-			"󰃞",
-			"󰃟",
-			"󰃠"
-		],
-		"on-scroll-up": "incbrightness",
-		"on-scroll-down": "decbrightness"
-	},
-	"network": {
-		"rotate": 90,
-		"format": "{ifname}",
-		"format-wifi": "<span size='10000' foreground='#f5e0dc'>  </span>{essid}",
-		"format-ethernet": " ",
-		"format-disconnected": " ",
-		"on-click": "nm-applet",
-		"tooltip-format": " {ifname} via {gwaddr}",
-		"tooltip-format-wifi": "   {essid} ({signalStrength}%)",
-		"tooltip-format-ethernet": "  {ifname} {ipaddr}/{cidr}",
-		"tooltip-format-disconnected": "Disconnected",
-		"max-length": 50
-	},
-	"power-profiles-daemon": {
-        "rotate": 90,
-		"format": "{icon}",
-		"tooltip-format": "Power profile: {profile}\nDriver: {driver}",
-		"tooltip": true,
-		"format-icons": {
-			"default": "",
-			"performance": "",
-			"balanced": "",
-			"power-saver": ""
-		}
-	},
-	"custom/calculator": {
-		"format": "",
-		"on-click": "qalculate-gtk",
-		"tooltip-format": "Open calculator"
-	},
-	"custom/tools": {
-		"format": "",
-		"tooltip-format": "Tools"
-	},
-	"group/bat": {
-		"orientation": "inherit",
-		"drawer": {
-			"transition-duration": 300,
-			"children-class": "not-memory",
-			"transition-left-to-right": false
-		},
-		"modules": [
-			"battery",
-			"power-profiles-daemon"
-		]
-	},
-    "group/tools": {
-		"orientation": "inherit",
-		"drawer": {
-			"transition-duration": 300,
-			"children-class": "not-memory",
-			"transition-left-to-right": false
-		},
-		"modules": [
-			"custom/tools",
-			"custom/calculator"
-		]
-	}
+  "layer": "top",
+  "position": "left",
+  "width": 28,
+  "margin": "2 0 2 2",
+  "spacing": 2,
+  "modules-left": [
+    "clock",
+    "custom/sep",
+    "group/bat",
+    "custom/sep",
+    "network"
+  ],
+  "modules-center": [
+    "custom/updates",
+    "tray",
+    "custom/sep",
+    "hyprland/workspaces",
+    "custom/sep",
+    "custom/uptime"
+  ],
+  "modules-right": [
+    "group/tools",
+    "custom/sep",
+    "temperature",
+    "custom/sep",
+    "pulseaudio",
+    "pulseaudio#microphone",
+    "custom/powermenu"
+  ],
+  "custom/sep": {
+    "format": "──",
+    "format-v2": ""
+  },
+  "custom/updates": {
+    "rotate": 90,
+    "format": "  {}",
+    "interval": 1800,
+    "escape": true,
+    "return-type": "json",
+    "exec": "$HOME/.config/waybar/scripts/update-sys.sh",
+    "exec-if": "[[ $(checkupdates-with-aur | wc -l) != 0 ]]",
+    "on-click": "foot --title 'update-sys' sh -c 'yay -Syu; echo Done - Press enter to exit; read'; pkill -SIGRTMIN+8 waybar",
+    "signal": 8,
+    "hide-empty-text": true
+  },
+  "battery": {
+    "states": {
+      "warning": 30,
+      "critical": 15
+    },
+    "rotate": 90,
+    "format": "<span size='10000' foreground='#a6e3a1'>{icon} </span> {capacity}%",
+    "format-warning": "<span size='10000' foreground='#B1E3AD'>{icon} </span> {capacity}%",
+    "format-critical": "<span size='10000' foreground='#E38C8F'>{icon} </span> {capacity}%",
+    "format-charging": "<span size='10000' foreground='#B1E3AD'> </span>{capacity}%",
+    "format-plugged": "<span size='10000' foreground='#B1E3AD'>  </span>{capacity}%",
+    "format-alt": "<span size='10000' foreground='#B1E3AD'>{icon} </span> {time}",
+    "format-full": "<span size='10000' foreground='#B1E3AD'> </span>{capacity}%",
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "tooltip-format": "{time}"
+  },
+  "custom/uptime": {
+    "exec": "$HOME/.config/waybar/scripts/uptime.sh",
+    "format": "󱫐",
+    "tooltip-format": "Uptime : {}",
+    "interval": 60,
+    "return-type": "text"
+  },
+  "custom/powermenu": {
+    "on-click": "~/.config/wlogout/script/logout.sh",
+    "format": "",
+    "tooltip": false
+  },
+  "hyprland/workspaces": {
+    "format": "{icon}",
+    "on-click": "activate",
+    "on-scroll-up": "hyprctl dispatch workspace e-1",
+    "on-scroll-down": "hyprctl dispatch workspace e+1",
+    "format-icons": {
+      "active": "",
+      "urgent": "",
+      "default": ""
+    }
+  },
+  "clock": {
+    "tooltip": true,
+    "format": "{:%H\n%M\n%d}",
+    "tooltip-format": "<big>{:%A, %d}</big>\n<tt><small>{calendar}</small></tt>"
+  },
+  "tray": {
+    "icon-size": 21,
+    "spacing": 10,
+    "show-passive-items": "true"
+  },
+  "temperature": {
+    "rotate": 90,
+    "hwmon-path": "/sys/class/hwmon/hwmon3/temp1_input",
+    "critical-threshold": 80,
+    "format": "{icon} {temperatureC}°C",
+    "format-icons": [
+      "",
+      "",
+      ""
+    ]
+  },
+  "pulseaudio": {
+    "rotate": 90,
+    "format": " {icon}   {volume}%",
+    "format-muted": "  ",
+    "format-bluetooth": "{icon}  {volume}%",
+    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+    "on-click-right": "pavucontrol",
+    "on-scroll-up": "wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+",
+    "on-scroll-down": "wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%-",
+    "scroll-step": 5,
+    "format-icons": {
+      "headphone": "",
+      "handsfree": " ",
+      "headset": " ",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": [
+        "",
+        "",
+        ""
+      ]
+    },
+    "tooltip": true,
+    "tooltip-format": "{icon}   at {volume}%"
+  },
+  "pulseaudio#microphone": {
+    "rotate": 90,
+    "format": "{format_source}",
+    "format-source": "",
+    "format-source-muted": " ",
+    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
+    "on-scroll-up": "wpctl set-volume -l 1 @DEFAULT_AUDIO_SOURCE@ 5%+",
+    "on-scroll-down": "wpctl set-volume -l 1 @DEFAULT_AUDIO_SOURCE@ 5%-",
+    "scroll-step": 5,
+    "tooltip": true,
+    "tooltip-format": " at {volume}%"
+  },
+  "backlight": {
+    "device": "intel_backlight",
+    "format": "{icon}",
+    "format-alt-click": "click-right",
+    "format-alt": "{icon} {percent}%",
+    "format-icons": [
+      "󰃞",
+      "󰃟",
+      "󰃠"
+    ],
+    "on-scroll-up": "incbrightness",
+    "on-scroll-down": "decbrightness"
+  },
+  "network": {
+    "rotate": 90,
+    "format": "{ifname}",
+    "format-wifi": "<span size='10000' foreground='#f5e0dc'>  </span>{essid}",
+    "format-ethernet": " ",
+    "format-disconnected": " ",
+    "on-click": "nm-applet",
+    "tooltip-format": " {ifname} via {gwaddr}",
+    "tooltip-format-wifi": "   {essid} ({signalStrength}%)",
+    "tooltip-format-ethernet": "  {ifname} {ipaddr}/{cidr}",
+    "tooltip-format-disconnected": "Disconnected",
+    "max-length": 50
+  },
+  "power-profiles-daemon": {
+    "rotate": 90,
+    "format": "{icon}",
+    "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+    "tooltip": true,
+    "format-icons": {
+      "default": "",
+      "performance": "",
+      "balanced": "",
+      "power-saver": " "
+    }
+  },
+  "custom/calculator": {
+    "format": "",
+    "on-click": "qalculate-gtk",
+    "tooltip-format": "Open calculator"
+  },
+  "custom/tools": {
+    "format": "",
+    "tooltip-format": "Tools"
+  },
+  "group/bat": {
+    "orientation": "inherit",
+    "drawer": {
+      "transition-duration": 300,
+      "children-class": "not-memory",
+      "transition-left-to-right": false
+    },
+    "modules": [
+      "battery",
+      "power-profiles-daemon"
+    ]
+  },
+  "group/tools": {
+    "orientation": "inherit",
+    "drawer": {
+      "transition-duration": 300,
+      "children-class": "not-memory",
+      "transition-left-to-right": false
+    },
+    "modules": [
+      "custom/tools",
+      "custom/calculator"
+    ]
+  }
 }

@@ -10,11 +10,10 @@ window#waybar {
   color: #a5adcb;
 }
 
- #power-profiles-daemon {
-    margin: 0px 0px 5px 0px;
-    padding:0px;
-    /* font-size:14px; */
-    color: #FFFFFF;
+#power-profiles-daemon {
+  margin: 0px 0px 5px 0px;
+  padding: 0px;
+  color: #ffffff;
 }
 
 .modules-left,
@@ -52,17 +51,18 @@ tooltip * {
 #tray {
 }
 
-#tray{
-    padding: 0 10px;
-    color: #ffffff;
+#tray {
+  padding: 0 10px;
+  color: #ffffff;
+  font-size: 6px;
 }
 #tray > .passive {
-    -gtk-icon-effect: dim;
+  -gtk-icon-effect: dim;
 }
 
 #tray > .needs-attention {
-    -gtk-icon-effect: highlight;
-    background-color: #eb4d4b;
+  -gtk-icon-effect: highlight;
+  background-color: #eb4d4b;
 }
 
 #workspaces {
@@ -86,15 +86,22 @@ tooltip * {
   font-weight: 600;
   color: #8bd5ca;
 }
-#custom-bluetooth_devices {
-  color: #8aadf4;
-}
+
 #pulseaudio {
   color: #a6da95;
 }
 
-#custom-updates{
-    padding: 5px 8px;
+#custom-updates,
+#group-tools {
+  padding: 5px 8px;
+}
+
+#custom-calculator {
+  font-size: 18px;
+  margin: 0px 0px 5px 0px;
+}
+#custom-uptime {
+  font-size: 18px;
 }
 #custom-updates,
 #pulseaudio.muted {

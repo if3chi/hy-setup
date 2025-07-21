@@ -1,3 +1,10 @@
+function _load_functions() {
+    # Load all custom function files // Directories are ignored
+    for file in "${ZDOTDIR:-$HOME/.config/zsh}/functions/"*.zsh; do
+        [ -r "$file" ] && source "$file"
+    done
+}
+
 export EDITOR=nvim
 export TERMINAL=ghostty
 export ZSH="$HOME/.oh-my-zsh"
@@ -53,6 +60,9 @@ alias zrc='source ~/.zshrc'
 alias update='sudo pacman -Syu && yay -Syu'
 alias nv='nvim'
 alias x='exit'
+
+# Load functions
+_load_functions
 
 # -----------------------------------------------------
 # Prompt
