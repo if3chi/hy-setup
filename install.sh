@@ -95,6 +95,7 @@ PACMAN_PACKAGES=(
     sddm
     nodejs
     npm
+    reflector
     tmux
 )
 
@@ -115,6 +116,7 @@ AUR_PACKAGES=(
     zen-browser-bin
     oh-my-posh-bin
     wlogout
+    vlc
 )
 
 # Install official packages

@@ -1,0 +1,1 @@
+zen-browser --new-window https://chat.openai.com

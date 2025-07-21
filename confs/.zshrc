@@ -41,7 +41,8 @@ setopt appendhistory
 #Aliases
 alias suspend='systemctl suspend-then-hibernate'
 alias ls='ls --color=auto'
-alias ll='ls -lhs'
+alias ll='lsd -lh'
+alias ff='fastfetch'
 alias grep='grep --color=auto'
 alias cat='bat'
 alias c='clear'
@@ -58,20 +59,3 @@ alias x='exit'
 # -----------------------------------------------------
 #eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/zen.toml)"
 eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/EDM115-newline.omp.json)"
-
-
-# Add this to ~/.zshrc to auto-reload when it changes
-autoload -U add-zsh-hook
-add-zsh-hook precmd reload-zshrc-if-needed
-
-reload-zshrc-if-needed() {
-  local zshrc="$HOME/.zshrc"
-  local stampfile="$HOME/.zshrc.last_sourced"
-
-  if [[ ! -f "$stampfile" || "$zshrc" -nt "$stampfile" ]]; then
-    echo "🔁 Detected .zshrc update, reloading..."
-    source "$zshrc"
-    touch "$stampfile"
-  fi
-}
-
