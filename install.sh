@@ -51,6 +51,7 @@ PACMAN_PACKAGES=(
     fuse2
     imagemagick
     jq
+    lsd
     neovim
     btop
     bluez
@@ -208,6 +209,13 @@ sudo tee /etc/modprobe.d/iwlwifi.conf > /dev/null <<EOF
 options iwlwifi power_save=0
 EOF
 
+sudo tee /etc/NetworkManager/conf.d/wifi-powersave-off.conf <<EOF
+[connection]
+wifi.powersave = 2
+EOF
+sudo systemctl restart NetworkManager
+
+
 echo "✅ Installation complete!"
 echo "💡 Don't forget to set zsh as your default shell:"
-echo "    chsh -s /bin/zsh"
+echo " chsh -s /bin/zsh"
