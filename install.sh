@@ -205,16 +205,11 @@ EOF
 
 # Disable aggressive power saving
 echo "Disable power saving"
-sudo tee /etc/modprobe.d/iwlwifi.conf > /dev/null <<EOF
-options iwlwifi power_save=0
-EOF
-
 sudo tee /etc/NetworkManager/conf.d/wifi-powersave-off.conf <<EOF
 [connection]
 wifi.powersave = 2
 EOF
 sudo systemctl restart NetworkManager
-
 
 echo "✅ Installation complete!"
 echo "💡 Don't forget to set zsh as your default shell:"
