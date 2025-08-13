@@ -118,6 +118,7 @@ AUR_PACKAGES=(
     oh-my-posh-bin
     wlogout
     vlc
+    jdk-openjdk
 )
 
 # Install official packages

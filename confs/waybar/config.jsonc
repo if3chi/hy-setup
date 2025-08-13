@@ -5,6 +5,7 @@
   "margin": "2 0 2 2",
   "spacing": 2,
   "modules-left": [
+     "custom/notification",
     "clock",
     "custom/sep",
     "group/bat",
@@ -40,7 +41,7 @@
     "return-type": "json",
     "exec": "$HOME/.config/waybar/scripts/update-sys.sh",
     "exec-if": "[[ $(checkupdates-with-aur | wc -l) != 0 ]]",
-    "on-click": "foot --title 'update-sys' sh -c 'yay -Syu; echo Done - Press enter to exit; read'; pkill -SIGRTMIN+8 waybar",
+    "on-click": "foot --title 'update-sys' sh -c 'checkupdates-with-aur; echo ==== Continue ====; yay -Syu; echo Done - Press enter to exit; read'; pkill -SIGRTMIN+8 waybar",
     "signal": 8,
     "hide-empty-text": true
   },
@@ -218,5 +219,30 @@
       "custom/tools",
       "custom/calculator"
     ]
+  },
+    // SwayNC
+  "custom/notification": {
+    "tooltip-format": "Left: Notifications\nRight: Do not disturb",
+    "format": "{icon}",
+    "format-icons": {
+      "notification":
+        "<span rise='8pt'><span foreground='red'><sup></sup></span></span>",
+      "none": "",
+      "dnd-notification":
+        "<span rise='8pt'><span foreground='red'><sup></sup></span></span>",
+      "dnd-none": "",
+      "inhibited-notification":
+        "<span rise='8pt'><span foreground='red'><sup></sup></span></span>",
+      "inhibited-none": "",
+      "dnd-inhibited-notification":
+        "<span rise='8pt'><span foreground='red'><sup></sup></span></span>",
+      "dnd-inhibited-none": ""
+    },
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true
   }
 }
