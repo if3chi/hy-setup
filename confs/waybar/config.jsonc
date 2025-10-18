@@ -168,7 +168,7 @@
     "format-wifi": "<span size='10000' foreground='#f5e0dc'>  </span>{essid}",
     "format-ethernet": " ",
     "format-disconnected": " ",
-    "on-click": "nm-applet",
+    // "on-click": "nm-applet",
     "tooltip-format": " {ifname} via {gwaddr}",
     "tooltip-format-wifi": "   {essid} ({signalStrength}%)",
     "tooltip-format-ethernet": "  {ifname} {ipaddr}/{cidr}",

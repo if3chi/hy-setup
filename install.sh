@@ -98,6 +98,15 @@ PACMAN_PACKAGES=(
     npm
     reflector
     tmux
+    v4l2loopback-dkms
+    qrcodegencpp-cmake
+    obs-studio
+    kdenlive
+    wl-clip-persist
+    wl-clipboard
+    wl-screenrec
+    xournalpp
+    gvfs-smb
 )
 
 # AUR packages
@@ -119,6 +128,7 @@ AUR_PACKAGES=(
     wlogout
     vlc
     jdk-openjdk
+    anydesk-bin
 )
 
 # Install official packages
@@ -148,6 +158,9 @@ for portal in xdg-desktop-portal-gnome xdg-desktop-portal-gtk; do
     yay -R --noconfirm "$portal"
   fi
 done
+
+# Install Flatpak packages
+# flatpak install flathub org.kde.kdenlive
 
 # Install Oh My Zsh (unattended)
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
